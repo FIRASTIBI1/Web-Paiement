@@ -1,0 +1,38 @@
+.footer {
+    background-color: rgba(67, 69, 112, 0.9); /* Même couleur que la navbar */
+    padding: 20px 50px; /* Espacement similaire à la navbar */
+    position: relative; /* Position relative pour le footer */
+    color: #fff; /* Couleur du texte */
+    text-align: center; /* Centrer le texte */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-menu {
+    list-style: none; /* Remove bullet points */
+    display: flex;
+    gap: 20px; /* Space between menu items */
+}
+
+.footer-item {
+    margin: 0; /* Reset margin */
+}
+
+.footer-link {
+    color: #fff; /* Link color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.footer-link:hover {
+    color: rgb(118, 167, 63); /* Change color on hover */
+}
+
+.footer-text {
+    margin-top: 10px; /* Space above the footer text */
+    font-size: 0.9rem; /* Font size for footer text */
+}

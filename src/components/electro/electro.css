@@ -1,0 +1,46 @@
+.product-container {
+    max-width: 1200px; /* Largeur maximale du conteneur */
+    margin: 50px auto; /* Centrer le conteneur */
+    padding: 20px; /* Espacement interne */
+}
+
+.product-cards {
+    display: flex; /* Utiliser flexbox pour aligner les cartes horizontalement */
+    justify-content: space-around; /* Espacement entre les cartes */
+    flex-wrap: wrap; /* Permettre aux cartes de passer à la ligne si nécessaire */
+}
+
+.product-card {
+    background-color: rgba(255, 255, 255, 0.9); /* Fond blanc avec transparence */
+    border: 1px solid #ccc; /* Bordure grise */
+    border-radius: 8px; /* Coins arrondis */
+    padding: 15px; /* Espacement interne */
+    text-align: center; /* Centrer le texte */
+    width: 25%; /* Réduire la largeur des cartes */
+    margin: 10px; /* Espacement entre les cartes */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ajouter une ombre légère */
+}
+
+.product-image {
+    max-width: 80%; /* S'assurer que l'image ne dépasse pas la carte */
+    height: auto; /* Garder les proportions de l'image */
+}
+
+.product-price {
+    font-weight: bold; /* Mettre le prix en gras */
+    margin: 10px 0; /* Espacement autour du prix */
+}
+
+.btn {
+    background-color: #28a745; /* Couleur verte */
+    color: white; /* Texte blanc */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    padding: 8px 16px; /* Espacement interne */
+    cursor: pointer; /* Curseur en forme de main */
+    font-size: 14px; /* Taille de police pour le bouton */
+}
+
+.btn:hover {
+    background-color: #218838; /* Couleur plus foncée au survol */
+}

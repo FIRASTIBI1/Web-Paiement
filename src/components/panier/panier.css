@@ -1,0 +1,63 @@
+
+
+/* Conteneur du panier */
+.panier-container {
+    background-color: #eaba70; /* Couleur de fond */
+    padding: 20px; /* Espacement interne */
+    border-radius: 20px; /* Coins arrondis */
+    max-width: 600px; /* Largeur maximale */
+    margin: 20px auto; /* Espacement autour du conteneur et centrer horizontalement */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre */
+    position: relative; /* Position relative pour le centrage vertical */
+    margin-top:300px; /* Déplacer vers le bas de 50% */
+    transform: translateY(-50%); /* Ajuster pour centrer verticalement */
+}
+
+/* Autres styles restent inchangés */
+.panier-header {
+    font-size: 24px; /* Taille de la police */
+    margin-bottom: 20px; /* Espacement en bas */
+    text-align: center; /* Centrer le texte */
+}
+
+.empty-cart-message {
+    color: #6c757d; /* Couleur du texte pour le message vide */
+    text-align: center; /* Centrer le texte */
+}
+
+.cart-items {
+    margin-top: 10px; /* Espacement en haut */
+}
+
+.cart-item {
+    display: flex; /* Utiliser flexbox pour aligner les éléments */
+    justify-content: space-between; /* Espacement entre les éléments */
+    padding: 10px; /* Espacement interne */
+    border-bottom: 1px solid #dee2e6; /* Bordure en bas */
+}
+
+.item-name {
+    font-weight: bold; /* Mettre le nom en gras */
+}
+
+.item-price {
+    color: #000000; /* Couleur du prix */
+}
+
+.total {
+    display: flex; /* Utiliser flexbox pour aligner les éléments */
+    justify-content: space-between; /* Espacement entre les éléments */
+    margin-top: 20px; /* Espacement en haut */
+    font-size: 18px; /* Taille de la police */
+}
+
+.checkout-button {
+    background-color: #000000; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border: none; /* Pas de bordure */
+    border-radius: 4px; /* Coins arrondis */
+    padding: 10px 15px; /* Espacement interne */
+    cursor: pointer; /* Curseur en main */
+    margin-top: 20px; /* Espacement en haut */
+    width: 100%; /* Prendre toute la largeur */
+}

@@ -1,0 +1,6 @@
+.auth-container {
+    max-width: 600px; /* Largeur maximale du formulaire */
+    height: 700px;
+    margin-top: 50px auto; /* Centrer le formulaire */
+    padding: 20px; /* Espacement interne */
+    background-color: rgba(255, 255, 255, 0.9); }
