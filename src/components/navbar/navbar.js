@@ -1,6 +1,8 @@
+// src/components/navbar/navbar.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { getAuth, signOut } from 'firebase/auth';
 import './navbar.css';
 
 const Navbar = () => {
@@ -8,6 +10,7 @@ const Navbar = () => {
     const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
+    const auth = getAuth();
 
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
@@ -41,8 +44,14 @@ const Navbar = () => {
         console.log('Search Term:', searchTerm);
     };
 
-    const handleLogout = () => {
-        console.log('User logged out');
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);  // Logs out the user from Firebase
+            console.log('User logged out');
+            navigate('/home');  // Redirect to home after logging out
+        } catch (error) {
+            console.error('Error logging out:', error.message);
+        }
     };
 
     const handleAccountClick = () => {

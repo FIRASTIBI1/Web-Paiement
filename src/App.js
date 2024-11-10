@@ -12,9 +12,12 @@ import Clothes from './components/clothes/clothes';
 import Footer from './components/footer/footer';
 import Panier from './components/panier/panier';
 import './App.css'; 
+import { UserProvider } from './UserContext';
 
 function App() {
   return (
+    <UserProvider>
+
     <Router>
       <div className="App">
       
@@ -38,6 +41,8 @@ function App() {
             <Footer />
           </div>
     </Router>
+    </UserProvider>
+
   );
 }
 

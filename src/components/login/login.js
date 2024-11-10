@@ -1,9 +1,8 @@
 // src/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import './login.css';
-import { auth } from '../../firebase';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -19,10 +18,8 @@ const Login = () => {
             // Attempt to log the user in
             await signInWithEmailAndPassword(auth, email, password);
             console.log('Login successful');
-            // Redirect to home page
-            navigate('/home');
+            navigate('/home'); // Redirect to home page
         } catch (err) {
-            // Handle errors, e.g., incorrect credentials
             setError(err.message);
             console.error('Login error:', err.message);
         }
