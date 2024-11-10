@@ -61,7 +61,7 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-container">
-                <a href="#home" className="navbar-logo">
+                <a href="../home/home" className="navbar-logo">
                     <img src={`${process.env.PUBLIC_URL}/logoo.png`} alt="Logo" className="logo-image" />
                 </a>
                 

@@ -4,42 +4,49 @@ import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/
 import { doc, setDoc } from 'firebase/firestore';
 import './signup.css';
 import { auth, db } from '../../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate(); // Initialize navigate
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (password !== confirmPassword) {
             setError("Passwords don't match.");
             return;
         }
-
+    
         try {
             // Create user with email and password
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-
+    
             // Send verification email
             await sendEmailVerification(user);
             console.log('Verification email sent.');
-
-            // Add user to Firestore database
+    
+            // Redirect to login page immediately after verification email is sent
+            navigate('/login'); // Redirect after email verification
+    
+            // Add user to Firestore database (this happens after the redirection)
             await setDoc(doc(db, 'users', user.uid), {
                 email: user.email,
                 createdAt: new Date(),
             });
             console.log('User added to Firestore.');
-
+    
             setError(''); // Clear error if successful
         } catch (error) {
-            setError(error.message);
+            setError(error.message); // Show error if there was an issue
         }
     };
+    
+    
 
     return (
         <div className="auth-container">
