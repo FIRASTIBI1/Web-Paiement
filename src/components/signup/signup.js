@@ -1,4 +1,3 @@
-// src/Signup.js
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
@@ -30,22 +29,22 @@ const Signup = () => {
             await sendEmailVerification(user);
             console.log('Verification email sent.');
     
-            // Redirect to login page immediately after verification email is sent
-            navigate('/login'); // Redirect after email verification
-    
-            // Add user to Firestore database (this happens after the redirection)
+            // Add user to Firestore database
+            // The collection 'users' and document will be automatically created
             await setDoc(doc(db, 'users', user.uid), {
                 email: user.email,
                 createdAt: new Date(),
             });
             console.log('User added to Firestore.');
     
+            // Redirect to login page after successful signup and email verification
+            navigate('/login');
+    
             setError(''); // Clear error if successful
         } catch (error) {
             setError(error.message); // Show error if there was an issue
         }
     };
-    
     
 
     return (
