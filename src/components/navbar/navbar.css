@@ -132,6 +132,7 @@
         border: 1px solid #ccc; /* Bordure */
         border-radius: 4px; /* Coins arrondis */
         margin-right: 10px; /* Espacement à droite pour séparer le bouton */
+        
     }
     
     .search-button {
@@ -142,23 +143,30 @@
         border: none; /* Pas de bordure */
         border-radius: 4px; /* Coins arrondis */
         cursor: pointer; /* Curseur en main */
+        border-radius: 40px;
+
+
     }
     
     .search-button:hover {
         background-color: #dc8408; /* Couleur de fond au survol */
         width:100px;
+        border-radius: 40px;
+
     }
 
     /* Style général de la barre de recherche */
 
 
 .search-input {
-    width: 100%;
+    width: 120%;
     padding: 10px 15px;
-    border-radius: 4px;
+    border-radius: 40px;
     border: 1px solid #ccc;
     font-size: 16px;
     transition: border-color 0.3s ease;
+    margin-left: -60px;
+    
 }
 
 .search-input:focus {
@@ -181,7 +189,7 @@
     z-index: 10;
     margin-top: 5px; /* Un petit espace entre la barre de recherche et les suggestions */
     padding: 5px 0;
-    margin-left: 420px;
+    margin-left: 650px;
 }
 
 .suggestion-item {
@@ -202,5 +210,8 @@
     background-color: #e3e3e3;
     font-weight: bold;
 }
-
-    
+.admin-image{
+    height: 50px; /* Adjust the height as needed */
+    width: auto; 
+    margin-right:420px;
+}

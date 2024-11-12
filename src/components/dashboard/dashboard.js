@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { ResponsiveBoxPlot } from "@nivo/boxplot";
+import { analytics } from "../../firebase"; // Import du fichier firebase.js
+import { logEvent } from "firebase/analytics";  // Import logEvent
 import './dashboard.css';
+
 const Dashboard = () => {
   const [data1, setData1] = useState(null);
   const [data2, setData2] = useState(null);
@@ -17,6 +20,19 @@ const Dashboard = () => {
       { value: 20, color: "#3c4449" },
     ];
     setData2(fetchedData2);
+
+    // Log an event when the data is fetched
+    logEvent(analytics, 'data_fetched', {
+      label: 'Sales Data Loaded',
+      value: fetchedData1.values.reduce((acc, val) => acc + val, 0),
+    });
+
+    // Log page view event when the dashboard is loaded
+    logEvent(analytics, 'page_view', {
+      page: 'Dashboard',
+      title: 'Dashboard Loaded'
+    });
+
   }, []);
 
   if (!data1 || !data2) {
@@ -40,9 +56,10 @@ const Dashboard = () => {
       <header>
         <h1>Dashboard</h1>
       </header>
-       <br></br>
-       <br></br>
-       <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+
       {/* Graphique Linéaire */}
       <section className="line-chart">
         <h2>Graphique Linéaire</h2>
@@ -52,6 +69,10 @@ const Dashboard = () => {
               key={index}
               className="bar"
               style={{ height: `${value / 10}px` }}
+              onClick={() => {
+                // Log an event when a bar is clicked
+                logEvent(analytics, 'bar_click', { label: data1.labels[index], value });
+              }}
             >
               <span>{data1.labels[index]}</span>
             </div>
@@ -63,7 +84,14 @@ const Dashboard = () => {
       <section className="doughnut-chart">
         <h2>Graphique Circulaire</h2>
         <div className="circle" style={{ backgroundColor: data2[0].color }}>
-          <div className="circle-inner" style={{ backgroundColor: data2[1].color }}></div>
+          <div
+            className="circle-inner"
+            style={{ backgroundColor: data2[1].color }}
+            onClick={() => {
+              // Log an event when the circular chart is clicked
+              logEvent(analytics, 'circle_click', { value: data2[0].value });
+            }}
+          ></div>
         </div>
       </section>
 

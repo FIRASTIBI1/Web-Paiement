@@ -97,6 +97,9 @@ const Navbar = () => {
     const handleHomeClick = () => {
         navigate('/home');  // Ajout de la fonction de redirection
     };
+    const handleAdminClick = () => {
+        navigate('/admin');  // Ajout de la fonction de redirection
+    };
 
     const handleAccountClick = () => {
         navigate('/account');
@@ -112,6 +115,11 @@ const Navbar = () => {
                 <a onClick={handleHomeClick} className="navbar-logo">
                     <img src={`${process.env.PUBLIC_URL}/logoo.png`} alt="Logo" className="logo-image" />
                 </a>
+               
+               <a onClick={handleAdminClick} className="navbar-logo">
+                    <img src={`${process.env.PUBLIC_URL}/admin.png`} alt="Logo" className="admin-image" />
+                </a>
+              
                 
                 <form onSubmit={handleSearch} className="search-form">
                     <div>

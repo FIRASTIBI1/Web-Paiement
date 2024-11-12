@@ -13,6 +13,7 @@ import Panier from './components/panier/panier';
 import Team from './components/team/team';
 import Dashboard from './components/dashboard/dashboard';
 import Cursor from './cursor';
+import Admin from './components/admin/admin';
 import './App.css'; 
 import { UserProvider } from './UserContext';
 
@@ -33,6 +34,7 @@ function App() {
           <Routes>
           <Route path="/" element={<Navigate to="/home" />} /> 
             <Route path="/home" element={<Home />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/seller" element={<Seller />} />
