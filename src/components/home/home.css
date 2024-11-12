@@ -476,6 +476,8 @@ p{
 
 .people{
   border-radius: 20%;
+  width:800px;
+  height:480px;
 }
 
 .slider {

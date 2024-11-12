@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { db } from '../../firebase'; // Firestore instance
+import { collection, doc, updateDoc, arrayUnion, setDoc, getDoc } from 'firebase/firestore'; // Firestore methods
+import { getAuth } from 'firebase/auth'; // Firebase Authentication
 import './seller.css'; // Import the CSS file for styling
 
 const Seller = () => {
@@ -7,26 +10,64 @@ const Seller = () => {
     const [productName, setProductName] = useState('');
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState('');
-    const [image, setImage] = useState(null);
+    const [description, setDescription] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Logique pour ajouter le produit (par exemple, appel API)
-        console.log({
-            sellerName,
-            location,
-            productName,
-            category,
-            price,
-            image,
-        });
-        // Réinitialiser le formulaire après soumission
-        setSellerName('');
-        setLocation('');
-        setProductName('');
-        setCategory('');
-        setPrice('');
-        setImage(null);
+
+        // Authentification utilisateur
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (user) {
+            const userEmail = user.email;
+
+            // Créer un produit
+            const product = {
+                sellerName,
+                location,
+                description,
+                imageUrl,
+                name: productName,
+                price: parseInt(price),
+                createdBy: userEmail,
+                timestamp: new Date()
+            };
+
+            // Référence au document de la catégorie
+            const categoryRef = doc(db, 'products', category);
+            
+            try {
+                // Vérifier si la catégorie existe
+                const categoryDoc = await getDoc(categoryRef);
+                
+                if (categoryDoc.exists()) {
+                    // Si la catégorie existe, ajouter le produit dans l'array "items"
+                    await updateDoc(categoryRef, {
+                        items: arrayUnion(product),
+                    });
+                } else {
+                    // Si la catégorie n'existe pas, créer le document avec le produit
+                    await setDoc(categoryRef, { items: [product] });
+                }
+
+                // Réinitialiser le formulaire
+                setSellerName('');
+                setLocation('');
+                setProductName('');
+                setCategory('');
+                setPrice('');
+                setDescription('');
+                setImageUrl('');
+
+                console.log('Product added successfully to the Firestore.');
+            } catch (error) {
+                console.error("Error adding product to Firestore:", error);
+            }
+        } else {
+            console.log('No user is logged in.');
+        }
     };
 
     return (
@@ -65,13 +106,17 @@ const Seller = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="category">Category</label>
-                    <input
-                        type="text"
+                    <select
                         id="category"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         required
-                    />
+                    >
+                        <option value="">Select Category</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothes">Clothes</option>
+                        <option value="accessories">Accessories</option>
+                    </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="price">Price</label>
@@ -84,11 +129,21 @@ const Seller = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="image">Product Image</label>
+                    <label htmlFor="description">Description</label>
+                    <textarea
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="imageUrl">Product Image URL</label>
                     <input
-                        type="file"
-                        id="image"
-                        onChange={(e) => setImage(e.target.files[0])}
+                        type="text"
+                        id="imageUrl"
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
                         required
                     />
                 </div>

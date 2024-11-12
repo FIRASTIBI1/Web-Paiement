@@ -1,0 +1,25 @@
+.team-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;  /* Ensures items wrap to the next line on smaller screens */
+}
+
+.team-member-box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+img {
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+ 
+}
+
+@media (max-width: 768px) {
+  .team-container {
+      flex-direction: column;  /* Stack items vertically on smaller screens */
+  }
+}

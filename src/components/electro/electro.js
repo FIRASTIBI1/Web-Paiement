@@ -1,53 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../../firebase'; // Import the Firestore instance
+import { doc, getDoc } from 'firebase/firestore'; // Firestore methods
 import './electro.css'; // Import the CSS file for styling
 
 const Electro = () => {
     const navigate = useNavigate();
+    const [products, setProducts] = useState([]);
 
-    const products = [
-        {
-            id: 1,
-            name: 'Gaming PC',
-            image: `${process.env.PUBLIC_URL}/tuf.jpg`,
-            description: 'A high-performance gaming PC with the latest graphics card and processor.',
-            price: '2000dt',
-        },
-        {
-            id: 2,
-            name: 'Kite',
-            image: `${process.env.PUBLIC_URL}/kite.png`,
-            description: 'A colorful kite perfect for outdoor fun and activities.',
-            price: '130dt',
-        },
-        {
-            id: 3,
-            name: 'Bluetooth Headset',
-            image: `${process.env.PUBLIC_URL}/casque.png`,
-            description: 'Wireless Bluetooth headset with noise cancellation and long battery life.',
-            price: '250dt',
-        },
-    ];
+    // Fetch products from Firestore
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                // Fetch the 'electronics' document from 'products' collection
+                const docRef = doc(db, 'products', 'electronics');
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists()) {
+                    const fetchedProducts = docSnap.data().items; // Get the items array
+                    setProducts(fetchedProducts);
+                } else {
+                    console.log("No such document!");
+                }
+            } catch (error) {
+                console.error("Error fetching products: ", error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
 
     const handleAddToCart = (product) => {
-        // Logique pour ajouter le produit au panier (par exemple, mise à jour de l'état global ou appel API)
+        // Logic to add the product to the cart (e.g., update global state or call an API)
         console.log(`Added to cart: ${product.name}`);
-        // Naviguer vers la page du panier
+        // Navigate to the cart page
         navigate('/panier');
     };
 
     return (
         <div className="product-container">
-            <br></br>
-            <br></br>
+            <br />
+            <br />
             <h2>Electronics</h2>
             <div className="product-cards">
                 {products.map((product) => (
-                    <div className="product-card" key={product.id}>
-                        <img src={product.image} alt={product.name} className="product-image" />
+                    <div className="product-card" key={product.name}>
+                        {/* Adjusted the image URL reference */}
+                        <img src={`/${product.imageUrl}`} alt={product.name} className="product-image" />
                         <h3>{product.name}</h3>
                         <p>{product.description}</p>
-                        <p className="product-price">{product.price}</p>
+                        <p className="product-price">{product.price}dt</p>
                         <button className="btn" onClick={() => handleAddToCart(product)}>Add to Buy</button>
                     </div>
                 ))}

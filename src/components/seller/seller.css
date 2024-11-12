@@ -4,3 +4,22 @@
     margin-top: 50px auto; /* Centrer le formulaire */
     padding: 20px; /* Espacement interne */
     background-color: rgba(255, 255, 255, 0.9); }
+
+    .form-group select {
+        width: 100%; /* Prendre toute la largeur */
+        padding: 0.5rem; /* Espacement interne */
+        border: 1px solid #ccc; /* Bordure */
+        border-radius: 5px; /* Coins arrondis */
+        background-color: #f9f9f9; /* Couleur de fond */
+        color: #333; /* Couleur du texte */
+        font-size: 1rem; /* Taille de la police */
+        transition: border-color 0.3s; /* Transition pour la couleur de bordure */
+    }
+    
+    .form-group select:focus {
+        border-color: #43d22d; /* Couleur de bordure au focus */
+        outline: none; /* Supprimer l'effet par défaut */
+        box-shadow: 0 0 5px rgba(239, 148, 11, 0.3); /* Légère ombre au focus */
+    }
+    
+    

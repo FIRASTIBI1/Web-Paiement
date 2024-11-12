@@ -1,0 +1,33 @@
+/* Curseur de base */
+.cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(75, 203, 25, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    transition: transform 0.1s ease;
+    transform: translate(-50%, -50%);
+}
+
+/* Effet lorsque la souris survole un élément (agrandissement du curseur) */
+.cursor-hovered {
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 0, 0, 0.6);  /* Curseur rouge lors du survol */
+}
+
+/* Exemple d'élément sur lequel on applique l'effet */
+.hoverable {
+    margin-top: 100px;
+    width: 200px;
+    height: 50px;
+    background-color: #007BFF;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}

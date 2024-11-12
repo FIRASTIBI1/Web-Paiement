@@ -1,0 +1,55 @@
+.dashboard {
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .chart-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  
+  .bar {
+    width: 40px;
+    background-color: #38af5b;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+  }
+  
+  .bar span {
+    position: absolute;
+    bottom: -20px;
+  }
+  .dashboard {
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .doughnut-chart .circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    background: conic-gradient(rgba(236,72,127,1) 0% 80%, rgba(60, 68, 73, 1) 80% 100%);
+  }
+  
+  .doughnut-chart .circle-inner {
+    width: 150px;
+    height: 150px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+  }
+  
