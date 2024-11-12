@@ -22,6 +22,8 @@
     display: flex;
     gap: 20px; /* Space between menu items */
     position: relative; /* Needed for dropdown positioning */
+    margin-top: 5px;
+    margin-left:150px;
 }
 
 .navbar-item {
@@ -131,7 +133,8 @@
         padding: 8px; /* Espacement interne */
         border: 1px solid #ccc; /* Bordure */
         border-radius: 4px; /* Coins arrondis */
-        margin-right: 10px; /* Espacement à droite pour séparer le bouton */
+        margin-right: 5px; /* Espacement à droite pour séparer le bouton */
+        margin-top: 8px;
         
     }
     
@@ -152,6 +155,7 @@
         background-color: #dc8408; /* Couleur de fond au survol */
         width:100px;
         border-radius: 40px;
+        color:white;
 
     }
 
@@ -166,6 +170,7 @@
     font-size: 16px;
     transition: border-color 0.3s ease;
     margin-left: -60px;
+    color:white;
     
 }
 
@@ -189,7 +194,7 @@
     z-index: 10;
     margin-top: 5px; /* Un petit espace entre la barre de recherche et les suggestions */
     padding: 5px 0;
-    margin-left: 650px;
+    margin-left:550px;
 }
 
 .suggestion-item {

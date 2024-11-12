@@ -13,7 +13,7 @@ const Navbar = () => {
     const auth = getAuth();
 
     // Exemple de données d'articles pour la recherche
-    const items = ['Electronics', 'Accessories', 'Clothes', 'Shoes', 'Toys', 'Home Appliances'];
+    const items = ['Electronics', 'Accessories', 'Clothes'];
 
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);

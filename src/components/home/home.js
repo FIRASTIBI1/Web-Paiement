@@ -69,11 +69,11 @@ const Home = () => {
                 <div className="text-description">
                     <h2 className="offers-title">Discounts</h2>
                     <p className="offers-description">
-                        Découvrez nos offres exceptionnelles sur une large gamme de produits. 
-                        Que vous cherchiez des vêtements, des accessoires ou des articles pour la maison, 
-                        KAIBI a tout ce qu'il vous faut à des prix imbattables. 
-                        Profitez de la qualité et de la diversité de nos produits, 
-                        et faites vos achats en toute confiance.
+                    Discover our exceptional offers on a wide range of products.
+Whether you are looking for clothing, accessories or home goods,
+KAIBI has everything you need at unbeatable prices.
+Enjoy the quality and diversity of our products,
+and shop with confidence.
                     </p>
                 </div>
                 <div className="slider">

@@ -54,7 +54,6 @@ h2 {
 label {
     display: block; /* Afficher le label en bloc */
     margin-bottom: 0.5rem; /* Espacement en bas du label */
-    color: #333; /* Couleur du texte */
 }
 
 input {
