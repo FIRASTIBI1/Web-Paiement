@@ -1,26 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import './panier.css'; // Importer le fichier CSS pour le style
+import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import './panier.css'; // Import your CSS for styling
 
-// Fonction fictive pour simuler la récupération des données depuis une API
-const fetchCartItems = async () => {
-  // Remplacez ceci par votre appel API
-  return [
-    { id: 1, name: "Produit 1", price: 10, quantity: 2 },
-    { id: 2, name: "Produit 2", price: 15, quantity: 1 },
-    { id: 3, name: "Produit 3", price: 20, quantity: 3 },
-  ];
-};
+// Firebase setup
+const db = getFirestore();
 
 const Panier = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Fetch cart items for the authenticated user from Firebase
   useEffect(() => {
-    const getCartItems = async () => {
-      const items = await fetchCartItems();
-      setCartItems(items);
+    const fetchCartItems = async () => {
+      try {
+        setIsLoading(true);
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (user) {
+          const cartRef = collection(db, 'carts');
+          const q = query(cartRef, where('userId', '==', user.uid));
+          const querySnapshot = await getDocs(q);
+
+          const items = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          setCartItems(items);
+        } else {
+          setCartItems([]);
+        }
+      } catch (error) {
+        console.error('Error fetching cart items:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
-    getCartItems();
+    fetchCartItems();
   }, []);
 
   const calculateTotal = () => {
@@ -28,11 +46,11 @@ const Panier = () => {
   };
 
   return (
-    
     <div className="panier-container">
-       
       <header className="panier-header">Mon Panier</header>
-      {cartItems.length === 0 ? (
+      {isLoading ? (
+        <p className="loading-message">Chargement...</p>
+      ) : cartItems.length === 0 ? (
         <p className="empty-cart-message">Votre panier est vide.</p>
       ) : (
         <div className="cart-items">
