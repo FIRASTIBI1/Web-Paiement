@@ -14,7 +14,8 @@ import Team from './components/team/team';
 import Dashboard from './components/dashboard/dashboard';
 import Cursor from './cursor';
 import Admin from './components/admin/admin';
-import Carte from './components/carte/carte'
+import Carte from './components/carte/carte';
+import Compte from './components/compte/compte';
 import './App.css'; 
 
 import { UserProvider } from './UserContext'; // Import UserProvider for user authentication
@@ -42,6 +43,7 @@ function App() {
               <Route path="/team" element={<Team />} />
               <Route path="/carte" element={<Carte />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/compte" element={<Compte />} />
             </Routes>
           </div>
           <Footer />
