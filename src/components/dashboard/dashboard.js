@@ -1,182 +1,159 @@
 import React, { useEffect, useState } from "react";
-import { ResponsiveBoxPlot } from "@nivo/boxplot";
-import { analytics } from "../../firebase"; // Import du fichier firebase.js
-import { logEvent } from "firebase/analytics";  // Import logEvent
-import './dashboard.css';
+import { ResponsiveLine } from "@nivo/line";
+import { ResponsivePie } from "@nivo/pie";
+import { analytics } from "../../firebase"; // Import firebase.js
+import { logEvent } from "firebase/analytics";
+import "./dashboard.css";
 
 const Dashboard = () => {
-  const [data1, setData1] = useState(null);
-  const [data2, setData2] = useState(null);
+  const [lineData, setLineData] = useState(null);
+  const [pieData, setPieData] = useState(null);
+  const [curveData, setCurveData] = useState(null); // Données pour la courbe
 
   useEffect(() => {
-    const fetchedData1 = {
-      labels: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
-      values: [1000, 1200, 935, 990, 1050, 1030, 1040],
-    };
-    setData1(fetchedData1);
+    // Simulation de données dynamiques pour les ventes
+    setLineData([
+      {
+        id: "Ventes",
+        data: [
+          { x: "Lun", y: 1000 },
+          { x: "Mar", y: 1200 },
+          { x: "Mer", y: 935 },
+          { x: "Jeu", y: 990 },
+          { x: "Ven", y: 1050 },
+          { x: "Sam", y: 1030 },
+          { x: "Dim", y: 1040 },
+        ],
+      },
+    ]);
 
-    const fetchedData2 = [
-      { value: 80, color: "rgba(236,72,127,1)" },
-      { value: 20, color: "#3c4449" },
-    ];
-    setData2(fetchedData2);
+    // Simulation de données pour le diagramme circulaire
+    setPieData([
+      { id: "Ventes", value: 80, color: "hsl(236, 72%, 47%)" },
+      { id: "Retours", value: 20, color: "hsl(52, 72%, 47%)" },
+    ]);
 
-    // Log an event when the data is fetched
-    logEvent(analytics, 'data_fetched', {
-      label: 'Sales Data Loaded',
-      value: fetchedData1.values.reduce((acc, val) => acc + val, 0),
+    // Génération de données pour une courbe sinusoïdale
+    const generatedCurveData = Array.from({ length: 50 }, (_, index) => ({
+      x: index,
+      y: Math.sin(index * 0.2) * 10 + 20, // Sinusoïde
+    }));
+
+    setCurveData([
+      {
+        id: "Courbe",
+        data: generatedCurveData,
+      },
+    ]);
+
+    // Log événements Firebase Analytics
+    logEvent(analytics, "page_view", {
+      page: "Dashboard",
+      title: "Dashboard Loaded",
     });
-
-    // Log page view event when the dashboard is loaded
-    logEvent(analytics, 'page_view', {
-      page: 'Dashboard',
-      title: 'Dashboard Loaded'
-    });
-
   }, []);
 
-  if (!data1 || !data2) {
+  if (!lineData || !pieData || !curveData) {
     return <p>Chargement des graphiques...</p>;
   }
-
-  // BoxPlot data
-  const boxPlotData = [
-    {
-      id: "group A",
-      data: [
-        { x: "A", y: [0, 1, 2, 3, 4] },
-        { x: "B", y: [2, 3, 4, 5, 6] },
-        { x: "C", y: [1, 2, 3, 4, 5] },
-      ],
-    },
-  ];
 
   return (
     <div className="dashboard">
       <header>
         <h1>Dashboard</h1>
       </header>
-      <br></br>
-      <br></br>
-      <br></br>
 
       {/* Graphique Linéaire */}
       <section className="line-chart">
+        <br></br>
+        <br></br>
+        <br></br>
         <h2>Graphique Linéaire</h2>
-        <div className="chart-container">
-          {data1.values.map((value, index) => (
-            <div
-              key={index}
-              className="bar"
-              style={{ height: `${value / 10}px` }}
-              onClick={() => {
-                // Log an event when a bar is clicked
-                logEvent(analytics, 'bar_click', { label: data1.labels[index], value });
-              }}
-            >
-              <span>{data1.labels[index]}</span>
-            </div>
-          ))}
+        <div style={{ height: 400 }}>
+          <ResponsiveLine
+            data={lineData}
+            margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+            xScale={{ type: "point" }}
+            yScale={{ type: "linear", min: "auto", max: "auto", stacked: true }}
+            axisBottom={{
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "Jours",
+              legendPosition: "middle",
+              legendOffset: 36,
+            }}
+            axisLeft={{
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "Valeurs",
+              legendPosition: "middle",
+              legendOffset: -40,
+            }}
+            colors={{ scheme: "nivo" }}
+            pointSize={10}
+            pointColor={{ theme: "background" }}
+            pointBorderWidth={2}
+            pointBorderColor={{ from: "serieColor" }}
+            useMesh={true}
+          />
         </div>
       </section>
 
       {/* Graphique Circulaire */}
       <section className="doughnut-chart">
         <h2>Graphique Circulaire</h2>
-        <div className="circle" style={{ backgroundColor: data2[0].color }}>
-          <div
-            className="circle-inner"
-            style={{ backgroundColor: data2[1].color }}
-            onClick={() => {
-              // Log an event when the circular chart is clicked
-              logEvent(analytics, 'circle_click', { value: data2[0].value });
-            }}
-          ></div>
+        <div style={{ height: 400 }}>
+          <ResponsivePie
+            data={pieData}
+            margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+            innerRadius={0.5}
+            padAngle={0.7}
+            cornerRadius={3}
+            colors={{ datum: "data.color" }}
+            borderWidth={1}
+            borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
+            radialLabelsSkipAngle={10}
+            radialLabelsTextColor="#333333"
+            radialLabelsLinkColor={{ from: "color" }}
+            sliceLabelsSkipAngle={10}
+            sliceLabelsTextColor="#333333"
+          />
         </div>
       </section>
 
-      {/* Graphique BoxPlot */}
-      <section className="boxplot-chart">
-        <h2>Graphique BoxPlot</h2>
+      {/* Courbe */}
+      <section className="curve-chart">
+        <h2>Courbe Sinusoïdale</h2>
         <div style={{ height: 400 }}>
-          <ResponsiveBoxPlot
-            data={boxPlotData}
-            margin={{ top: 60, right: 140, bottom: 60, left: 60 }}
-            minValue={0}
-            maxValue={10}
-            subGroupBy="subgroup"
-            padding={0.12}
-            enableGridX={true}
-            axisTop={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "",
-              legendOffset: 36,
-            }}
-            axisRight={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "",
-              legendOffset: 0,
-            }}
+          <ResponsiveLine
+            data={curveData}
+            margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+            xScale={{ type: "linear" }}
+            yScale={{ type: "linear", min: "auto", max: "auto", stacked: false }}
             axisBottom={{
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
-              legend: "group",
+              legend: "Index",
               legendPosition: "middle",
-              legendOffset: 32,
+              legendOffset: 36,
             }}
             axisLeft={{
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
-              legend: "value",
+              legend: "Amplitude",
               legendPosition: "middle",
               legendOffset: -40,
             }}
-            colors={{ scheme: "nivo" }}
-            borderRadius={2}
-            borderWidth={2}
-            borderColor={{
-              from: "color",
-              modifiers: [["darker", 0.3]],
-            }}
-            medianWidth={2}
-            medianColor={{
-              from: "color",
-              modifiers: [["darker", 0.3]],
-            }}
-            whiskerEndSize={0.6}
-            whiskerColor={{
-              from: "color",
-              modifiers: [["darker", 0.3]],
-            }}
-            motionConfig="stiff"
-            legends={[
-              {
-                anchor: "right",
-                direction: "column",
-                justify: false,
-                translateX: 100,
-                itemWidth: 60,
-                itemHeight: 20,
-                itemsSpacing: 3,
-                itemTextColor: "#999",
-                symbolSize: 20,
-                symbolShape: "square",
-                effects: [
-                  {
-                    on: "hover",
-                    style: {
-                      itemTextColor: "#000",
-                    },
-                  },
-                ],
-              },
-            ]}
+            colors={{ scheme: "category10" }}
+            pointSize={6}
+            pointColor={{ theme: "background" }}
+            pointBorderWidth={2}
+            pointBorderColor={{ from: "serieColor" }}
+            useMesh={true}
           />
         </div>
       </section>

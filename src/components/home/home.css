@@ -525,3 +525,7 @@ p{
   line-height: 1.5; /* Hauteur de ligne pour une meilleure lisibilité */
   text-align: left; /* Alignement à gauche */
 }
+
+.paragraph{
+  color:white;
+}

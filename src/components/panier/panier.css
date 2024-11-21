@@ -61,3 +61,35 @@
     margin-top: 20px; /* Espacement en haut */
     width: 100%; /* Prendre toute la largeur */
 }
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espace entre les éléments */
+}
+
+.quantity-controls button {
+    width: 24px; /* Taille des boutons */
+    height: 24px; /* Taille des boutons */
+    background-color: transparent; /* Fond transparent */
+    border: 1px solid black; /* Bordure noire */
+    border-radius: 4px; /* Coins légèrement arrondis */
+    color: black; /* Couleur du texte noir */
+    font-size: 14px; /* Taille de la police */
+    cursor: pointer; /* Changement de curseur pour indiquer un bouton cliquable */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.quantity-controls button:hover {
+    background-color: #f0f0f0; /* Couleur de fond au survol */
+}
+
+.quantity-controls span {
+    font-size: 16px; /* Taille de la quantité */
+    font-weight: bold; /* Texte en gras */
+    text-align: center; /* Centré */
+    width: 32px; /* Assure un alignement stable */
+}

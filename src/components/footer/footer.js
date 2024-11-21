@@ -7,12 +7,12 @@ const Footer = () => {
             <div className="footer-container">
                 
                 <ul className="footer-menu">
-                    <li className="footer-item"><a href="#privacy" className="footer-link">Politique de confidentialité</a></li>
-                    <li className="footer-item"><a href="#terms" className="footer-link">Conditions d'utilisation</a></li>
-                    <li className="footer-item"><a href="#contact" className="footer-link">Contact</a></li>
+                    <li className="footer-item"><a href="#privacy" className="footer-link">Privacy Policy</a></li>
+                    <li className="footer-item"><a href="#terms" className="footer-link">Terms of Use</a></li>
+                    <li className="footer-item"><a href="#contact" className="footer-link">Contact Us</a></li>
                 </ul>
             </div>
-            <p className="footer-text">© 2023 KAIBI Marketplace. Tous droits réservés.</p>
+            <p className="footer-text">© 2024 KAIBI Marketplace.All rights reserved.</p>
         </footer>
     );
 };

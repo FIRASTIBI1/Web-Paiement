@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './components/navbar/navbar';
 import Home from './components/home/home';
 import Login from './components/login/login'; 
@@ -14,40 +14,39 @@ import Team from './components/team/team';
 import Dashboard from './components/dashboard/dashboard';
 import Cursor from './cursor';
 import Admin from './components/admin/admin';
+import Carte from './components/carte/carte'
 import './App.css'; 
-import { UserProvider } from './UserContext';
+
+import { UserProvider } from './UserContext'; // Import UserProvider for user authentication
+import { CartProvider } from './CartContext'; // Import CartProvider for cart functionality
 
 function App() {
-  
-  
-
   return (
     <UserProvider>
-      <Router>
-        <div className="App">
-          <div>
-            <Cursor/>
-          </div>
-          <div>
+      <CartProvider> {/* Wrap the app in CartProvider for global cart state */}
+        <Router>
+          <div className="App">
+            <Cursor />
             <Navbar />
+            <Routes>
+              <Route path="/" element={<Navigate to="/home" />} /> 
+              <Route path="/home" element={<Home />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/seller" element={<Seller />} />
+              <Route path="/electro" element={<Electro />} />
+              <Route path="/clothes" element={<Clothes />} />
+              <Route path="/accesoire" element={<Accessoires />} />
+              <Route path="/panier" element={<Panier />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/carte" element={<Carte />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
           </div>
-          <Routes>
-          <Route path="/" element={<Navigate to="/home" />} /> 
-            <Route path="/home" element={<Home />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/seller" element={<Seller />} />
-            <Route path="/electro" element={<Electro />} />
-            <Route path="/clothes" element={<Clothes />} />
-            <Route path="/accesoire" element={<Accessoires />} />
-            <Route path="/panier" element={<Panier />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </div>
-        <Footer />
-      </Router>
+          <Footer />
+        </Router>
+      </CartProvider>
     </UserProvider>
   );
 }

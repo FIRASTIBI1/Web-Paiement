@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase'; // Importer l'instance Firestore
 import { doc, getDoc } from 'firebase/firestore'; // Méthodes Firestore
+import { useCart } from '../../CartContext';
 import './electro.css'; // Importer le même fichier CSS pour le style
 
 const Clothes = () => {
     const navigate = useNavigate();
+    const { addToCart } = useCart();
     const [products, setProducts] = useState([]);
 
     // Récupérer les produits de vêtements depuis Firestore
@@ -31,7 +33,7 @@ const Clothes = () => {
     }, []);
 
     const handleAddToCart = (product) => {
-        console.log(`Ajouté au panier : ${product.name}`);
+        addToCart(product); // Add product to cart
         navigate('/panier');
     };
 

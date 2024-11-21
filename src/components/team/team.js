@@ -14,9 +14,7 @@ const Team = () => {
             <br></br>
             <br></br>
             <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+            
             
             <div className="bg-white py-24 sm:py-32">
                 <div className="mx-auto grid max-w-7xl px-6 lg:px-8">
@@ -24,12 +22,18 @@ const Team = () => {
                         <div className="team-member-box flex items-center gap-x-6">
                             <img
                                 className="h-16 w-16 rounded-full"
-                                src="fyras.jpg"
+                                src="fyraa.jpg"
                                 alt="Fyras Tibi"
                             />
                             <div>
                                 <h3 className="text-base font-semibold tracking-tight text-gray-900">Fyras Tibi</h3>
                                 <p className="text-sm font-semibold text-indigo-600">Co-Founder / CEO</p>
+                                <img 
+                                    className="medium-qr-image"
+                                    src="firas.png"
+                                    alt="Fyras QR Code"
+                                />
+                                <p className="text-sm text-gray-600">Full Stack Developer</p>
                             </div>
                         </div>
 
@@ -42,6 +46,12 @@ const Team = () => {
                             <div>
                                 <h3 className="text-base font-semibold tracking-tight text-gray-900">Hamza Kada</h3>
                                 <p className="text-sm font-semibold text-indigo-600">Co-Founder / CEO</p>
+                                <img 
+                                    className="medium-qr-image"
+                                    src="hamza.png"
+                                    alt="Hamza QR Code"
+                                />
+                                <p className="text-sm text-gray-600">Web Developer</p>
                             </div>
                         </div>
                          
@@ -54,10 +64,6 @@ const Team = () => {
             <br></br>
             <br></br>
             <br></br>
-            <br></br>
-       
-            
-           
             <br></br>
         </div>
     );

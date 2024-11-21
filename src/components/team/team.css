@@ -2,24 +2,57 @@
   display: flex;
   justify-content: center;
   gap: 2rem;
-  flex-wrap: wrap;  /* Ensures items wrap to the next line on smaller screens */
+  flex-wrap: wrap;  /* Assure que les éléments se replient sur la ligne suivante sur des écrans plus petits */
 }
 
 .team-member-box {
   display: flex;
+  flex-direction: column;  /* Aligner les éléments verticalement */
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;  /* Espacement entre le nom, le QR code et la description */
+  text-align: center;  /* Centrer le texte sous l'image */
+  max-width: 200px;  /* Limiter la largeur des boîtes de membres */
+  width: 100%;  /* Assurer que chaque membre occupe toute la largeur disponible sur les petits écrans */
 }
 
 img {
-  width: 20rem;
-  height: 20rem;
+  width: 12rem;  /* Ajuste la taille des images principales */
+  height: 12rem;
   border-radius: 50%;
- 
+  object-fit: cover;  /* Assurer que l'image couvre le cercle sans distorsion */
+}
+
+.medium-qr-image {
+  width: 100px;  /* Taille fixe pour les QR codes */
+  height: 100px;
+  margin-top: 10px;  /* Espacement entre l'image principale et le QR code */
+  border-radius: 8px;
+  object-fit: cover;  /* Assurer que l'image QR code s'adapte bien dans son cadre */
+}
+
+p {
+  font-size: 0.9rem;  /* Taille du texte */
+  color: #555;  /* Couleur du texte de description */
+  margin-top: 5px;  /* Espacement entre le texte et l'image */
 }
 
 @media (max-width: 768px) {
   .team-container {
-      flex-direction: column;  /* Stack items vertically on smaller screens */
+    flex-direction: column;  /* Empile les éléments verticalement sur les petits écrans */
+    gap: 1rem;  /* Réduit l'espacement entre les membres de l'équipe */
+  }
+
+  .team-member-box {
+    width: 80%;  /* Réduit la largeur des membres pour mieux s'adapter aux petits écrans */
+  }
+
+  img {
+    width: 8rem;  /* Réduit la taille des images principales sur les petits écrans */
+    height: 8rem;
+  }
+
+  .medium-qr-image {
+    width: 80px;  /* Réduit la taille des QR codes sur les petits écrans */
+    height: 80px;
   }
 }

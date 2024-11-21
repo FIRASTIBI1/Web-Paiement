@@ -38,6 +38,7 @@ h1 {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     width: 100%;
     height: 100%; /* Prendre toute la hauteur du conteneur */
+
 }
 
 h2 {
@@ -54,6 +55,7 @@ h2 {
 label {
     display: block; /* Afficher le label en bloc */
     margin-bottom: 0.5rem; /* Espacement en bas du label */
+    color:#000;
 }
 
 input {
@@ -61,6 +63,7 @@ input {
     padding: 0.5rem; /* Espacement interne */
     border: 1px solid #ccc; /* Bordure */
     border-radius: 5px; /* Coins arrondis */
+    color :black;
 }
 
 .auth-button {
@@ -92,3 +95,5 @@ input {
 .google-button:hover {
     background-color: #357AE8; /* Couleur de fond au survol */
 }
+
+
