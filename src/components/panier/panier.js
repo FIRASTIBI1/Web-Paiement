@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importer useNavigate
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { useCart } from '../../CartContext';
 import './panier.css';
 
 const Panier = () => {
     const { cartItems, clearCart } = useCart();
-    const [items, setItems] = useState(cartItems); // Copier les items dans un état local
-    const navigate = useNavigate(); // Initialiser useNavigate
+    const [items, setItems] = useState(cartItems); // Copy items to a local state
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const calculateTotal = () => {
         return items.reduce((total, item) => total + item.price * (item.quantity || 1), 0);
@@ -27,16 +27,16 @@ const Panier = () => {
     };
 
     const handleClick = () => {
-        const totalAmount = calculateTotal(); // Calculez le montant total
-        clearCart(); // Vider le panier (si nécessaire)
-        navigate('/carte', { state: { totalAmount } }); // Naviguer avec le montant total
+        const totalAmount = calculateTotal(); // Calculate the total amount
+        clearCart(); // Clear the cart (if necessary)
+        navigate('/carte', { state: { totalAmount } }); // Navigate with the total amount
     };
 
     return (
         <div className="panier-container">
-            <header className="panier-header">Mon Panier</header>
+            <header className="panier-header">My Cart</header>
             {items.length === 0 ? (
-                <p className="empty-cart-message">Votre panier est vide.</p>
+                <p className="empty-cart-message">Your cart is empty.</p>
             ) : (
                 <div className="cart-items">
                     {items.map((item, index) => (
@@ -51,10 +51,10 @@ const Panier = () => {
                         </div>
                     ))}
                     <div className="total">
-                        <strong>Total :</strong>
+                        <strong>Total:</strong>
                         <span>{calculateTotal()} DTN</span>
                     </div>
-                    <button className="checkout-button" onClick={handleClick}>Passer à la caisse</button>
+                    <button className="checkout-button" onClick={handleClick}>Proceed to Checkout</button>
                 </div>
             )}
         </div>

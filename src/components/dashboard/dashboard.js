@@ -68,7 +68,7 @@ const Dashboard = () => {
         <br></br>
         <br></br>
         <br></br>
-        <h2>Graphique Linéaire</h2>
+        <h2>Weekly Sales</h2>
         <div style={{ height: 400 }}>
           <ResponsiveLine
             data={lineData}
@@ -103,7 +103,7 @@ const Dashboard = () => {
 
       {/* Graphique Circulaire */}
       <section className="doughnut-chart">
-        <h2>Graphique Circulaire</h2>
+        <h2>Sales vs Returns</h2>
         <div style={{ height: 400 }}>
           <ResponsivePie
             data={pieData}
@@ -125,7 +125,7 @@ const Dashboard = () => {
 
       {/* Courbe */}
       <section className="curve-chart">
-        <h2>Courbe Sinusoïdale</h2>
+        <h2>Sinusoidal Curve</h2>
         <div style={{ height: 400 }}>
           <ResponsiveLine
             data={curveData}

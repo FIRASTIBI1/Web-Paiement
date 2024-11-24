@@ -93,31 +93,50 @@
     flex-direction: column; /* Disposition en colonne */
 }
 /* Styles pour le menu déroulant du profil */
+/* Agrandir le menu déroulant du profil */
 .profile-dropdown-menu {
     display: block; /* Afficher le menu déroulant */
     position: absolute; /* Positionner en dessous de l'icône de profil */
     background-color: rgba(67, 69, 112, 0.9); /* Couleur de fond identique à celle de la navbar */
-    border-radius: 5px; /* Coins arrondis */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Ombre pour le menu déroulant */
+    border-radius: 40px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée pour le menu */
     margin-top: 10px; /* Espace entre l'icône et le menu déroulant */
-    padding: 10px 0; /* Espacement interne pour les éléments du menu */
+    padding: 15px 0; /* Plus de padding interne pour espacer les éléments */
     z-index: 1000; /* S'assurer qu'il est au-dessus des autres contenus */
-   width:230%;
-   height:300%;
+    width: 180px; /* Augmenter la largeur du menu */
+    height: auto; /* Hauteur automatique pour ajuster selon le contenu */
+    margin-left: -110px;
 }
-.navbar-profile-icon{
-    margin-top:-7px;
-}
+
+/* Espacement entre les éléments du menu déroulant */
 .profile-dropdown-item {
     list-style: none; /* Supprimer les puces */
-    color:white;
+    color: white;
+    padding: 12px 20px; /* Ajouter du padding pour espacer les éléments */
+    font-size: 16px; /* Augmenter la taille de police */
+    cursor: pointer; /* Curseur pointer pour l'interactivité */
+    transition: background-color 0.3s ease; /* Transition douce pour l'effet de survol */
 }
 
+/* Effet de survol des éléments du menu */
 .profile-dropdown-item:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Changer le fond au survol */
-    cursor: pointer; /* Changer le curseur au survol */
-
+    background-color: rgba(255, 255, 255, 0.2); /* Fond plus clair au survol */
 }
+
+/* Ajuster l'icône de profil */
+.navbar-profile-icon {
+    margin-top: -7px;
+    font-size: 40px; /* Augmenter la taille de l'icône de profil pour une meilleure visibilité */
+}
+
+/* Changer la taille de l'icône "My Account" et "Logout" */
+.profile-dropdown-item img {
+    width: 20px; /* Taille des icônes */
+    height: 20px;
+    margin-right: 10px; /* Espacement à droite des icônes */
+    vertical-align: middle; /* Centrer les icônes verticalement */
+}
+
 
 
 .form-group {
@@ -127,6 +146,7 @@
     .search-form {
         display: flex; /* Utiliser flexbox pour aligner les éléments sur la même ligne */
         align-items: center; /* Centrer verticalement les éléments */
+
     }
     
     .search-input {
@@ -219,4 +239,10 @@
     height: 50px; /* Adjust the height as needed */
     width: auto; 
     margin-right:420px;
+}
+.profile-icon {
+    width: 24px; /* Adjust the size as necessary */
+    height: 24px; /* Keep the width and height proportional */
+    margin-right: 8px; /* Add space between the icon and text */
+    vertical-align: middle; /* Align the icon vertically with the text */
 }

@@ -182,12 +182,15 @@ const Navbar = () => {
                         </div>
                         {isProfileDropdownOpen && (
                             <ul className="profile-dropdown-menu">
-                                <li className="profile-dropdown-item" onClick={handleAccountClick}>
-                                    My Account
-                                </li>
-                                <li className="profile-dropdown-item" onClick={handleLogout}>
-                                    Logout
-                                </li>
+                               <li className="profile-dropdown-item" onClick={handleAccountClick}>
+    <img src={`${process.env.PUBLIC_URL}/ac.png`} alt="Account Icon" className="profile-icon" />
+    My Account
+</li>
+<li className="profile-dropdown-item" onClick={handleLogout}>
+    <img src={`${process.env.PUBLIC_URL}/lg.png`} alt="Logout Icon" className="profile-icon" />
+    Logout
+</li>
+
                             </ul>
                         )}
                     </li>

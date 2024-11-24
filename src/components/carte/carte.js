@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import emailjs from 'emailjs-com';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { useLocation } from 'react-router-dom'; // Importer useLocation pour récupérer les données
+import { useLocation } from 'react-router-dom'; // Import useLocation to get data
 import './carte.css';
 
 const Carte = () => {
     const [cardNumber, setCardNumber] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
-    const [userEmail, setUserEmail] = useState(null); // Email de l'utilisateur connecté
+    const [userEmail, setUserEmail] = useState(null); // Email of the logged-in user
     const form = useRef();
 
     const auth = getAuth();
-    const location = useLocation(); // Utilisez useLocation pour récupérer `totalAmount`
-    const totalAmount = location.state?.totalAmount || 0; // Récupérer `totalAmount` passé par `panier.js`
+    const location = useLocation(); // Use useLocation to get `totalAmount`
+    const totalAmount = location.state?.totalAmount || 0; // Get `totalAmount` passed from `panier.js`
 
-    // Récupérer l'utilisateur connecté au chargement du composant
+    // Get the logged-in user on component mount
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -29,16 +29,16 @@ const Carte = () => {
 
     const formatCardNumber = (value) => {
         return value
-            .replace(/\D/g, '') // Supprime tout sauf les chiffres
-            .replace(/(.{4})/g, '$1-') // Ajoute un '-' après chaque 4 chiffres
-            .replace(/-$/, ''); // Supprime un '-' final s'il existe
+            .replace(/\D/g, '') // Remove all non-digit characters
+            .replace(/(.{4})/g, '$1-') // Add a hyphen after every 4 digits
+            .replace(/-$/, ''); // Remove trailing hyphen if any
     };
 
     const formatExpiryDate = (value) => {
         return value
-            .replace(/\D/g, '') // Supprime tout sauf les chiffres
-            .replace(/(.{2})/, '$1/') // Ajoute un '/' après 2 chiffres
-            .replace(/\/$/, ''); // Supprime un '/' final s'il existe
+            .replace(/\D/g, '') // Remove all non-digit characters
+            .replace(/(.{2})/, '$1/') // Add a '/' after 2 digits
+            .replace(/\/$/, ''); // Remove trailing '/' if any
     };
 
     const handleCardNumberChange = (e) => {
@@ -50,9 +50,9 @@ const Carte = () => {
     };
 
     const handleCvvChange = (e) => {
-        const value = e.target.value.replace(/\D/g, ''); // Supprime tout sauf les chiffres
+        const value = e.target.value.replace(/\D/g, ''); // Remove all non-digit characters
         if (value.length <= 3) {
-            setCvv(value); // Limite à 3 chiffres
+            setCvv(value); // Limit to 3 digits
         }
     };
 
@@ -60,31 +60,36 @@ const Carte = () => {
         e.preventDefault();
 
         if (userEmail) {
-            // Si l'utilisateur est connecté, envoyer l'email
+            // If the user is logged in, send the email
             sendEmailConfirmation();
-            alert('Paiement effectué avec succès');
+            alert('Payment successfully processed');
+
+            // Clear the form fields after payment
+            setCardNumber('');
+            setExpiryDate('');
+            setCvv('');
         } else {
-            alert('Veuillez vous connecter avant de procéder au paiement.');
+            alert('Please log in before proceeding with the payment.');
         }
     };
 
     const sendEmailConfirmation = () => {
         if (!userEmail) {
-            console.error('Aucun utilisateur connecté');
+            console.error('No user logged in');
             return;
         }
 
-        // Envoi de l'email avec les données du formulaire
+        // Send the email with the form data
         emailjs
             .sendForm('service_d6f4jfn', 'template_3gq2fwb', form.current, 'YzBe24gH1i-5PYF8m')
             .then(
                 (response) => {
-                    console.log('Email envoyé avec succès!', response);
-                    alert('Un email de confirmation a été envoyé à votre adresse.');
+                    console.log('Email sent successfully!', response);
+                    alert('A confirmation email has been sent to your address.');
                 },
                 (error) => {
-                    console.error("Échec de l'envoi de l'email", error.text);
-                    alert("Échec de l'envoi de l'email.");
+                    console.error('Failed to send the email', error.text);
+                    alert('Failed to send the email.');
                 }
             );
     };
@@ -92,7 +97,7 @@ const Carte = () => {
     return (
         <div className="auth-container">
             <div className="auth-form">
-                <h2>Informations de Carte</h2>
+                <h2>Card Information</h2>
                 <form ref={form} onSubmit={handlePayment}>
                     <input
                         type="hidden"
@@ -105,7 +110,7 @@ const Carte = () => {
                         value={totalAmount.toString()}
                     />
                     <div className="form-group">
-                        <label htmlFor="cardNumber">Numéro de carte</label>
+                        <label htmlFor="cardNumber">Card Number</label>
                         <input
                             type="text"
                             id="cardNumber"
@@ -113,20 +118,20 @@ const Carte = () => {
                             value={cardNumber}
                             onChange={handleCardNumberChange}
                             placeholder="XXXX-XXXX-XXXX-XXXX"
-                            maxLength={19} // Limite à 16 chiffres + 3 tirets
+                            maxLength={19} // Limit to 16 digits + 3 hyphens
                             required
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="expiryDate">Date d'expiration</label>
+                        <label htmlFor="expiryDate">Expiry Date</label>
                         <input
                             type="text"
                             id="expiryDate"
                             name="expiry_date"
                             value={expiryDate}
                             onChange={handleExpiryDateChange}
-                            placeholder="MM/AA"
-                            maxLength={5} // Limite à 4 chiffres + 1 '/'
+                            placeholder="MM/YY"
+                            maxLength={5} // Limit to 4 digits + 1 '/'
                             required
                         />
                     </div>
@@ -139,11 +144,11 @@ const Carte = () => {
                             value={cvv}
                             onChange={handleCvvChange}
                             placeholder="XXX"
-                            maxLength={3} // Limite à 3 chiffres
+                            maxLength={3} // Limit to 3 digits
                             required
                         />
                     </div>
-                    <button type="submit" className="auth-button">Payer</button>
+                    <button type="submit" className="auth-button">Pay</button>
                 </form>
             </div>
         </div>
