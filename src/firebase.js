@@ -1,7 +1,7 @@
 // src/firebase.js
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';  // Import collection and addDoc
 import { getAnalytics } from 'firebase/analytics';  // Import Firebase Analytics
 
 // Votre configuration Firebase
@@ -22,4 +22,5 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const analytics = getAnalytics(app);  // Initialiser Analytics
 
-export { auth, db, analytics };  // Exporter les services
+// Exporter les services et Firestore methods
+export { auth, db, analytics, collection, addDoc };

@@ -100,3 +100,4 @@ and shop with confidence.
 };
 
 export default Home;
+

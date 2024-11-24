@@ -29,7 +29,7 @@ const Panier = () => {
     const handleClick = () => {
         const totalAmount = calculateTotal(); // Calculate the total amount
         clearCart(); // Clear the cart (if necessary)
-        navigate('/carte', { state: { totalAmount } }); // Navigate with the total amount
+        navigate('/carte', { state: { cartItems: items, totalAmount } }); // Navigate with the total amount
     };
 
     return (

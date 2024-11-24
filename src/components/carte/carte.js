@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import emailjs from 'emailjs-com';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { db, collection, addDoc } from '../../firebase';  // Correct import path
 import { useLocation } from 'react-router-dom'; // Import useLocation to get data
 import './carte.css';
 
@@ -12,8 +13,9 @@ const Carte = () => {
     const form = useRef();
 
     const auth = getAuth();
-    const location = useLocation(); // Use useLocation to get `totalAmount`
-    const totalAmount = location.state?.totalAmount || 0; // Get `totalAmount` passed from `panier.js`
+    const location = useLocation(); // Use useLocation to get totalAmount
+    const cartItems = location.state?.cartItems || [];  // Get cart items passed from panier.js
+    const totalAmount = location.state?.totalAmount || 0; // Get totalAmount passed from panier.js
 
     // Get the logged-in user on component mount
     useEffect(() => {
@@ -56,18 +58,37 @@ const Carte = () => {
         }
     };
 
-    const handlePayment = (e) => {
+    const handlePayment = async (e) => {
         e.preventDefault();
 
         if (userEmail) {
-            // If the user is logged in, send the email
-            sendEmailConfirmation();
-            alert('Payment successfully processed');
+            try {
+                const commandesCollection = collection(db, 'commandes'); // Reference to Firestore collection
 
-            // Clear the form fields after payment
-            setCardNumber('');
-            setExpiryDate('');
-            setCvv('');
+                // Add document to Firestore with cart items and total price
+                const docRef = await addDoc(commandesCollection, {
+                    user: userEmail,
+                    date: new Date().toISOString(),
+                    items: cartItems.map((item) => ({
+                        name: item.name,
+                        price: item.price,
+                        quantity: item.quantity,
+                    })), // Ensure that cart items are mapped and passed properly
+                    totalPrice: totalAmount, // Real total price calculated in Panier
+                });
+
+                console.log('Document written with ID: ', docRef.id);
+                sendEmailConfirmation();
+                alert('Payment successfully processed');
+
+                // Clear the form fields after payment
+                setCardNumber('');
+                setExpiryDate('');
+                setCvv('');
+            } catch (error) {
+                console.error('Error adding document: ', error);
+                alert('There was an error processing the payment. Please try again.');
+            }
         } else {
             alert('Please log in before proceeding with the payment.');
         }

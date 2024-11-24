@@ -46,3 +46,72 @@ p{
 .stars .star:hover {
     fill: orange;
 }
+
+
+/* Style du container général */
+.compte-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Style pour la boîte de la commande */
+.order-box {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-box p {
+    margin: 5px 0;
+}
+
+/* Style pour la section des commandes */
+.order-history-section {
+    margin-top: 20px;
+}
+
+.order-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Style pour les éléments dans chaque commande */
+.order-item {
+    margin-left: 20px;
+}
+
+/* Amélioration visuelle pour le profil */
+.profile-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-image {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.user-info h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Amélioration de la notation */
+.stars {
+    display: flex;
+    justify-content: center;
+}
+
+.star {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
