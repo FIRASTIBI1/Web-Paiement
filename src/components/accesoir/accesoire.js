@@ -38,6 +38,8 @@ const Accessories = () => {
 
     return (
         <div className="product-container">
+            <br></br>
+            <br></br>
             <h2>Accessoires</h2>
             <div className="product-cards">
                 {products.map((product) => (
@@ -46,7 +48,7 @@ const Accessories = () => {
                         <h3>{product.name}</h3>
                         <p>{product.description}</p>
                         <p className="product-price">{product.price}dt</p>
-                        <button className="btn" onClick={() => handleAddToCart(product)}>Ajouter au panier</button>
+                        <button className="btn" onClick={() => handleAddToCart(product)}>Add to Buy</button>
                     </div>
                 ))}
             </div>

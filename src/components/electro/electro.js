@@ -36,8 +36,13 @@ const Electro = () => {
     };
 
     return (
+        
         <div className="product-container">
+            <br></br>
+            <br></br>
+            <br></br>
             <h2>Electronics</h2>
+            
             <div className="product-cards">
                 {products.map((product) => (
                     <div className="product-card" key={product.name}>

@@ -11,8 +11,6 @@ const Navbar = () => {
     const [suggestions, setSuggestions] = useState([]);
     const navigate = useNavigate();
     const auth = getAuth();
-
-    // Exemple de données d'articles pour la recherche
     const items = ['Electronics', 'Accessories', 'Clothes'];
 
     const toggleDropdown = () => {
@@ -88,6 +86,7 @@ const Navbar = () => {
         try {
             await signOut(auth);
             console.log('User logged out');
+            setProfileDropdownOpen(false); // Ferme la liste déroulante
             navigate('/home');
         } catch (error) {
             console.error('Error logging out:', error.message);
@@ -100,6 +99,7 @@ const Navbar = () => {
     
 
     const handleAccountClick = () => {
+        setProfileDropdownOpen(false); // Ferme la liste déroulante
         navigate('/compte');
     };
 
@@ -114,9 +114,6 @@ const Navbar = () => {
                     <img src={`${process.env.PUBLIC_URL}/logoo.png`} alt="Logo" className="logo-image" />
                 </a>
                
-               
-              
-                
                 <form onSubmit={handleSearch} className="search-form">
                     <div>
                         <input
@@ -182,15 +179,14 @@ const Navbar = () => {
                         </div>
                         {isProfileDropdownOpen && (
                             <ul className="profile-dropdown-menu">
-                               <li className="profile-dropdown-item" onClick={handleAccountClick}>
-    <img src={`${process.env.PUBLIC_URL}/ac.png`} alt="Account Icon" className="profile-icon" />
-    My Account
-</li>
-<li className="profile-dropdown-item" onClick={handleLogout}>
-    <img src={`${process.env.PUBLIC_URL}/lg.png`} alt="Logout Icon" className="profile-icon" />
-    Logout
-</li>
-
+                                <li className="profile-dropdown-item" onClick={handleAccountClick}>
+                                    <img src={`${process.env.PUBLIC_URL}/ac.png`} alt="Account Icon" className="profile-icon" />
+                                    My Account
+                                </li>
+                                <li className="profile-dropdown-item" onClick={handleLogout}>
+                                    <img src={`${process.env.PUBLIC_URL}/lg.png`} alt="Logout Icon" className="profile-icon" />
+                                    Logout
+                                </li>
                             </ul>
                         )}
                     </li>

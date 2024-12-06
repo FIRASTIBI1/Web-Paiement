@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './home.css';
 import { UserContext } from '../../UserContext';
 
+
 const images = [
     `${process.env.PUBLIC_URL}/cart1.jpg`,
     `${process.env.PUBLIC_URL}/cart2.jpg`,

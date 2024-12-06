@@ -247,3 +247,12 @@
     vertical-align: middle; /* Align the icon vertically with the text */
 }
 
+.cart-notification {
+    position: absolute;
+    top: 10px; /* Ajustez en fonction de la position de l'icône */
+    right: 10px; /* Ajustez en fonction de la position de l'icône */
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+}

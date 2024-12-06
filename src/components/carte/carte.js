@@ -60,39 +60,59 @@ const Carte = () => {
 
     const handlePayment = async (e) => {
         e.preventDefault();
-
-        if (userEmail) {
-            try {
-                const commandesCollection = collection(db, 'commandes'); // Reference to Firestore collection
-
-                // Add document to Firestore with cart items and total price
-                const docRef = await addDoc(commandesCollection, {
-                    user: userEmail,
-                    date: new Date().toISOString(),
-                    items: cartItems.map((item) => ({
-                        name: item.name,
-                        price: item.price,
-                        quantity: item.quantity,
-                    })), // Ensure that cart items are mapped and passed properly
-                    totalPrice: totalAmount, // Real total price calculated in Panier
-                });
-
-                console.log('Document written with ID: ', docRef.id);
-                sendEmailConfirmation();
-                alert('Payment successfully processed');
-
-                // Clear the form fields after payment
-                setCardNumber('');
-                setExpiryDate('');
-                setCvv('');
-            } catch (error) {
-                console.error('Error adding document: ', error);
-                alert('There was an error processing the payment. Please try again.');
-            }
-        } else {
-            alert('Please log in before proceeding with the payment.');
+    
+        if (!userEmail) {
+            alert('Veuillez vous connecter avant de procéder au paiement.');
+            return;
+        }
+    
+        if (!cartItems || cartItems.length === 0) {
+            alert('Le panier est vide.');
+            return;
+        }
+    
+        if (!totalAmount || totalAmount <= 0) {
+            alert('Le montant total est invalide.');
+            return;
+        }
+    
+        // Log des données pour déboguer
+        console.log("User Email:", userEmail);
+        console.log("Cart Items:", cartItems);
+        console.log("Total Amount:", totalAmount);
+    
+        try {
+            const commandesCollection = collection(db, 'commandes');
+    
+            // Ajouter un document à Firestore
+            const docRef = await addDoc(commandesCollection, {
+                user: userEmail,
+                date: new Date().toISOString(),
+                items: cartItems.map((item) => ({
+                    name: item.name || 'Nom inconnu', // Gérer les noms manquants
+                    price: item.price || 0,           // Gérer les prix manquants
+                    quantity: item.quantity || 1,    // Gérer les quantités manquantes
+                })),
+                totalPrice: totalAmount,
+            });
+    
+            console.log('Document ajouté avec ID: ', docRef.id);
+    
+            // Envoyer l'email de confirmation
+            sendEmailConfirmation();
+    
+            alert('Paiement effectué avec succès.');
+    
+            // Réinitialiser les champs
+            setCardNumber('');
+            setExpiryDate('');
+            setCvv('');
+        } catch (error) {
+            console.error('Erreur lors de l\'ajout du document : ', error);
+            alert('Une erreur est survenue lors du traitement du paiement. Veuillez réessayer.');
         }
     };
+    
 
     const sendEmailConfirmation = () => {
         if (!userEmail) {
