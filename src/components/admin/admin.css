@@ -1,0 +1,112 @@
+.crud-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.crud-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 800px;
+}
+
+.user-list {
+  width: 45%;
+}
+
+.management-section {
+  width: 45%;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0.5rem 0.25rem;
+}
+
+button.create-button {
+  background-color: #ffc107; /* Yellow */
+}
+
+button.update-button {
+  background-color: #28a745; /* Green */
+}
+
+button.delete-button {
+  background-color: #dc3545; /* Red */
+}
+
+.data-item {
+  background-color: #fff;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.data-item:hover {
+  background-color: #fff6e5;
+  color: #ff9800;
+}
+
+/* Logo */
+.logo-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Photo circulaire */
+.admin-photo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.admin-photo .photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+
+
+
+
+
+
+
