@@ -529,5 +529,15 @@ p{
 .paragraph{
   color:white;
 }
+.description h1 {
+  font-family: "Tilt Neon", sans-serif;
+  font-size: clamp(3rem, 5vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 30px;
+  color: white; /* Assure que tout le texte est blanc */
+}
+
+
+
 
 
